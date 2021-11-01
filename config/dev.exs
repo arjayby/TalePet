@@ -25,7 +25,15 @@ config :tale_pet, TalePetWeb.Endpoint,
   secret_key_base: "3NXBMJ1/lt2NEX8inFQcHIvIPW3j8RMPAtPSGLA6GtE94YPF4W0+81uKdrII3UmT",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    npx: [
+      "tailwindcss",
+      "--input=css/app.css",
+      "--output=../priv/static/assets/app.css",
+      "--postcss",
+      "--watch",
+      cd: Path.expand("../assets", __DIR__)
+    ]
   ]
 
 # ## SSL Support
